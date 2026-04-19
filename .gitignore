@@ -1,0 +1,55 @@
+# Python caches
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# Virtual environments
+.venv/
+venv/
+env/
+.python-version
+
+# Packaging / build
+build/
+dist/
+site/
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+
+# Tooling
+.ipynb_checkpoints/
+
+# Generated run artifacts
+outputs/
+artifacts/
+logs/
+
+# Local datasets and ad hoc downloads
+data/*.csv
+data/*.txt
+data/*.parquet
+data/*.feather
+data/*.pkl
+!data/daily__MACE_paper.csv
+
+# IDE / editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS noise
+.DS_Store
+Thumbs.db
+
+.codex/
+
+.codex/

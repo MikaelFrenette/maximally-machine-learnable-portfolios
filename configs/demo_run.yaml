@@ -1,0 +1,84 @@
+# Demo run configuration used by run_demo.sh.
+
+run_name: mace20_demo
+
+dataset:
+  provider: mace_paper_csv # options: yahoo, mace_paper_csv
+  path: data/daily__MACE_paper.csv
+  calendar: XNYS
+  price_field: "Adj Close" # options: "Adj Close"
+  start_date: 2003-01-01
+  end_date: 2026-03-26
+  drop_missing: false
+  auto_adjust: false
+  progress: false
+  universe:
+    size: 20
+
+preprocessing:
+  return_column: return
+  date_column: date
+  id_column: asset_id
+  ticker_column: ticker
+  sector_column: sector
+  industry_column: industry
+  lags: 5
+  lag_feature_prefix: lag
+  drop_rows_with_missing_lags: true
+  sort_panel: true
+
+split:
+  train_start: 2003-01-01
+  train_end: 2016-12-31
+  test_start: 2017-01-01
+  test_end: 2026-03-26
+
+model:
+  variant: mace # options: mace
+  device: cpu # options: cpu, cuda
+  stopping_rule: max_iterations # options: max_iterations, tolerance
+  selection_rule: best_oob # options: last_iteration, best_oob
+  selection_smoothing_window: 5
+  max_iterations: 250
+  min_iterations: 5
+  learning_rate: 0.01
+  tolerance: 0.0001
+  ridge_alpha: 0.0168
+  ridge_alpha_selection: target_r2 # options: fixed, cv, target_r2
+  ridge_alpha_min: 0.0001
+  ridge_alpha_max: 10.0
+  ridge_alpha_grid_size: 100
+  ridge_target_r2: 0.01
+  lambda_tranquilizer: 1.0
+  ridge_n_jobs: -1
+  ridge_lower_bound: -3.0 # options: null, <float>
+  ridge_upper_bound: null # options: null, <float>
+  ridge_stock_specific_penalty: true
+  rhs_init_cov_sample: 0.0
+  rhs_init_cov_sample_shrinkage: lw03 # options: none, lw03
+  random_forest_n_estimators: 1500 # default = 1500
+  random_forest_mtry_denom: 10 # resolves mtry as floor(n_features / 10); we avoid sklearn float max_features for parity
+  random_forest_max_depth: null
+  random_forest_min_node_size: 200 # mapped to sklearn/cuML as a parity-oriented approximation of ranger::min.node.size
+  random_state: 42
+
+trading:
+  enabled: true
+  vol_model: ewma # options: ewma
+  lookback: 2520
+  gamma: 5.0
+  alpha: 0.94
+  position_min: -1.0
+  position_max: 2.0
+  horizon: 1
+
+plotting:
+  enabled: true
+  image_format: png # options: png
+  dpi: 150
+  benchmark_ticker: ^GSPC
+  benchmark_label: S&P 500
+
+outputs:
+  log_level: INFO # options: DEBUG, INFO, WARNING, ERROR, CRITICAL
+  verbosity: 1

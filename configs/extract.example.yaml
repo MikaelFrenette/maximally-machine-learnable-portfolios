@@ -1,0 +1,24 @@
+# Yahoo-based raw feature extraction example.
+
+tickers:
+  - SPY
+  - QQQ
+
+start_date: 2010-01-01
+end_date: 2020-12-31
+
+# Destination CSV for the extracted long-format panel.
+output_path: outputs/features/yahoo_panel.csv
+
+# Master session calendar. options: XNYS
+calendar: XNYS
+
+# Whether to drop rows with missing returns.
+drop_missing: false
+
+# Yahoo Finance loader options.
+auto_adjust: false
+progress: false
+
+# Currently fixed to adjusted close. options: "Adj Close"
+price_field: "Adj Close"
